@@ -1,0 +1,24 @@
+{
+  "name": "my-2fa-theme",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A starter template for complete (v2 app) 2FA themes",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "node scripts/dev.js",
+    "test": "node scripts/test.js",
+    "test:host": "node scripts/validate-host.js",
+    "format": "prettier --write src scripts tests dev theme.config.js package.json README.md README.en.md",
+    "format:check": "prettier --check src scripts tests dev theme.config.js package.json README.md README.en.md"
+  },
+  "devDependencies": {
+    "fflate": "0.8.3",
+    "happy-dom": "20.14.5",
+    "prettier": "3.6.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

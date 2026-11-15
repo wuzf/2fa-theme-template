@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>My Theme · Synthetic development shell</title>
+    <link rel="stylesheet" href="/src/styles/tokens.css" />
+    <link rel="stylesheet" href="/src/styles/theme.css" />
+    <style>
+      body {
+        margin: 0;
+      }
+      .dev-banner {
+        padding: 12px;
+        background: #fff3b8;
+        color: #332600;
+        font: 14px/1.5 system-ui;
+        border-bottom: 2px solid #332600;
+      }
+      .dev-banner strong {
+        display: block;
+      }
+      .dev-banner nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 12px;
+      }
+      .dev-banner a {
+        color: inherit;
+      }
+      #dev-output {
+        max-height: 90px;
+        overflow: auto;
+        margin: 0;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="dev-banner">
+      <strong
+        >Development shell · Synthetic accounts and clock · No real clipboard or
+        server writes</strong
+      >开发壳使用合成账户与时间，不是真实安装；主机流程只显示调用记录，主机文案只有英文。
+      <nav aria-label="Variants">
+        <a href="?">Default</a>
+        <a href="?scheme=dark">Dark</a>
+        <a href="?lang=zh-CN">中文</a>
+        <a href="?density=compact">Compact</a>
+        <a href="?state=loading">Loading</a>
+        <a href="?state=empty">Empty</a>
+        <a href="?state=error">Error</a>
+        <a href="?state=logged-out">Signed out</a>
+        <a href="?state=unconfirmed">Unconfirmed</a>
+        <a href="?state=offline">Offline + queue</a>
+        <a href="?state=hidden">Hidden accounts</a>
+        <a href="?state=hotp">HOTP unknown</a>
+      </nav>
+      <pre id="dev-output" aria-live="polite"></pre>
+    </aside>
+    <div id="app"></div>
+    <script type="module" src="/dev/main.js"></script>
+  </body>
+</html>

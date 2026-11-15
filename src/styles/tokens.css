@@ -1,0 +1,64 @@
+/* Colours, type and spacing. Customise: change the palette here, and the
+   same values in src/hostAppearance.js so the host's dialogs match
+   (tests/theme.test.js compares the two). The host marks dark mode with
+   data-theme="dark" on <html>. */
+.tpl-theme {
+  color-scheme: light;
+  --tpl-surface: #ffffff;
+  --tpl-subtle: #f4f5f7;
+  --tpl-hover: #e9ebef;
+  --tpl-text: #1d2127;
+  --tpl-muted: #5b6370;
+  --tpl-line: #d5d9e0;
+  --tpl-stroke: #8b93a0;
+  --tpl-accent: #2257c5;
+  --tpl-accent-hover: #1b469f;
+  --tpl-accent-text: #ffffff;
+  --tpl-selected: #e3ebfa;
+  --tpl-danger: #b3261e;
+  --tpl-danger-background: #fce8e6;
+  --tpl-warning: #7a5900;
+  --tpl-warning-background: #fdf3d7;
+  --tpl-success: #1e6b3a;
+  --tpl-success-background: #e3f2e8;
+  --tpl-radius: 12px;
+  --tpl-control-radius: 8px;
+  --tpl-shadow: 0 4px 16px #0000002e;
+  --tpl-font:
+    system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --tpl-code-font: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* The theme's density setting changes these three. */
+  --tpl-gap: 16px;
+  --tpl-card-padding: 16px;
+  --tpl-code-size: 2rem;
+  /* The smallest size of anything you can tap. */
+  --tpl-touch: 44px;
+}
+
+[data-theme="dark"] .tpl-theme {
+  color-scheme: dark;
+  --tpl-surface: #1f232a;
+  --tpl-subtle: #171a1f;
+  --tpl-hover: #2c313a;
+  --tpl-text: #e8eaee;
+  --tpl-muted: #a7aeba;
+  --tpl-line: #3a404b;
+  --tpl-stroke: #6f7785;
+  --tpl-accent: #8fb3ff;
+  --tpl-accent-hover: #adc7ff;
+  --tpl-accent-text: #10203f;
+  --tpl-selected: #26365a;
+  --tpl-danger: #ffb4ab;
+  --tpl-danger-background: #4a2522;
+  --tpl-warning: #f0c75e;
+  --tpl-warning-background: #3d3218;
+  --tpl-success: #8fd6a4;
+  --tpl-success-background: #1e3a28;
+}
+
+.tpl-theme[data-density="compact"] {
+  --tpl-gap: 10px;
+  --tpl-card-padding: 12px;
+  --tpl-code-size: 1.6rem;
+}

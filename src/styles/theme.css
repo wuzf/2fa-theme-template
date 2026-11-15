@@ -1,0 +1,524 @@
+/* Layout and components. Every rule starts with .tpl-theme so nothing leaks
+   into the host's dialogs. Customise anything here.
+
+   Two rules the tests (tests/touch-*.test.js) hold you to:
+   - :hover only inside @media (hover: hover). On a phone a tap leaves
+     :hover stuck on the control until the next tap elsewhere.
+   - every such hover rule has an :active twin inside @media (hover: none),
+     so a press on a touch screen still shows feedback. */
+
+.tpl-theme {
+  -webkit-tap-highlight-color: transparent;
+  min-height: 100%;
+  background: var(--tpl-subtle);
+  color: var(--tpl-text);
+  font: 16px/1.5 var(--tpl-font);
+}
+.tpl-theme *,
+.tpl-theme *::before,
+.tpl-theme *::after {
+  box-sizing: border-box;
+}
+/* Hidden things take no space, whatever display a rule gives them. */
+.tpl-theme [hidden] {
+  display: none !important;
+}
+.tpl-theme :focus-visible {
+  outline: 3px solid var(--tpl-accent);
+  outline-offset: 2px;
+}
+/* Headings receive focus only so screen readers follow page changes. */
+.tpl-theme [tabindex="-1"]:focus {
+  outline: none;
+}
+.tpl-theme .tpl-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.tpl-theme h1,
+.tpl-theme h2,
+.tpl-theme h3,
+.tpl-theme p {
+  margin: 0;
+}
+
+/* ---- Controls ---- */
+.tpl-theme button,
+.tpl-theme input,
+.tpl-theme select {
+  font: inherit;
+  color: inherit;
+}
+.tpl-theme button {
+  cursor: pointer;
+}
+.tpl-theme button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.tpl-theme .tpl-button,
+.tpl-theme .tpl-icon-button,
+.tpl-theme .tpl-select,
+.tpl-theme .tpl-search-input {
+  min-height: var(--tpl-touch);
+  border: 1px solid var(--tpl-stroke);
+  border-radius: var(--tpl-control-radius);
+  background: var(--tpl-surface);
+}
+.tpl-theme .tpl-button {
+  padding: 0 16px;
+}
+.tpl-theme .tpl-button.is-primary {
+  border-color: var(--tpl-accent);
+  background: var(--tpl-accent);
+  color: var(--tpl-accent-text);
+}
+.tpl-theme .tpl-icon-button {
+  min-width: var(--tpl-touch);
+  padding: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.tpl-theme .tpl-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tpl-touch);
+  color: var(--tpl-accent);
+}
+
+/* ---- Header: brand, search, Manage ---- */
+.tpl-theme .tpl-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px var(--tpl-gap);
+  border-bottom: 1px solid var(--tpl-line);
+  background: var(--tpl-surface);
+}
+.tpl-theme .tpl-brand {
+  font-size: 1.25rem;
+}
+.tpl-theme .tpl-search {
+  display: flex;
+  flex: 1 1 240px;
+  gap: 8px;
+  min-width: 0;
+}
+.tpl-theme .tpl-search-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 12px;
+}
+
+/* ---- Page, toolbar and status rows ---- */
+.tpl-theme .tpl-main {
+  display: grid;
+  gap: var(--tpl-gap);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--tpl-gap);
+}
+.tpl-theme .tpl-page {
+  display: grid;
+  gap: var(--tpl-gap);
+}
+.tpl-theme .tpl-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+/* minmax(0, 1fr) lets a select get narrower than its longest option, so on a
+   phone it stays inside its column instead of covering the next control. */
+.tpl-theme .tpl-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  min-width: 0;
+  color: var(--tpl-muted);
+  font-size: 0.875rem;
+}
+.tpl-theme .tpl-select {
+  width: 100%;
+  padding: 0 8px;
+  color: var(--tpl-text);
+}
+.tpl-theme .tpl-found {
+  color: var(--tpl-muted);
+}
+.tpl-theme .tpl-states {
+  display: grid;
+  gap: 8px;
+}
+.tpl-theme .tpl-state,
+.tpl-theme .tpl-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 8px 12px;
+  border-radius: var(--tpl-control-radius);
+}
+.tpl-theme .tpl-state {
+  background: var(--tpl-warning-background);
+  color: var(--tpl-warning);
+}
+.tpl-theme .tpl-state > span,
+.tpl-theme .tpl-row > span {
+  flex: 1 1 240px;
+}
+.tpl-theme .tpl-panel {
+  display: grid;
+  gap: 8px;
+  padding: var(--tpl-card-padding);
+  border: 1px solid var(--tpl-line);
+  border-radius: var(--tpl-radius);
+  background: var(--tpl-surface);
+}
+.tpl-theme .tpl-panel-title,
+.tpl-theme .tpl-group-title,
+.tpl-theme .tpl-menu-title {
+  font-size: 1rem;
+}
+.tpl-theme .tpl-empty {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+/* ---- Accounts ---- */
+.tpl-theme .tpl-groups,
+.tpl-theme .tpl-group {
+  display: grid;
+  gap: var(--tpl-gap);
+}
+.tpl-theme .tpl-group-title {
+  color: var(--tpl-muted);
+}
+.tpl-theme .tpl-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: var(--tpl-gap);
+}
+.tpl-theme .tpl-card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: var(--tpl-card-padding);
+  border: 1px solid var(--tpl-line);
+  border-radius: var(--tpl-radius);
+  background: var(--tpl-surface);
+}
+.tpl-theme .tpl-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.tpl-theme .tpl-avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--tpl-selected);
+  color: var(--tpl-accent);
+  font-weight: 600;
+}
+.tpl-theme .tpl-avatar img {
+  width: 24px;
+  height: 24px;
+}
+/* Long names end with "…" instead of widening the card. */
+.tpl-theme .tpl-names {
+  flex: 1;
+  min-width: 0;
+}
+.tpl-theme .tpl-service,
+.tpl-theme .tpl-account {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tpl-theme .tpl-service {
+  font-size: 1rem;
+}
+.tpl-theme .tpl-account {
+  color: var(--tpl-muted);
+  font-size: 0.875rem;
+}
+.tpl-theme .tpl-menu-trigger {
+  flex: none;
+  border-color: transparent;
+}
+.tpl-theme .tpl-account-menu {
+  position: absolute;
+  top: calc(var(--tpl-card-padding) + 48px);
+  right: var(--tpl-card-padding);
+  z-index: 2;
+  display: grid;
+  min-width: 200px;
+  padding: 4px;
+  border: 1px solid var(--tpl-line);
+  border-radius: var(--tpl-control-radius);
+  background: var(--tpl-surface);
+  box-shadow: var(--tpl-shadow);
+}
+.tpl-theme .tpl-menu-item,
+.tpl-theme .tpl-menu-entry {
+  display: grid;
+  min-height: var(--tpl-touch);
+  padding: 8px 12px;
+  border: 0;
+  border-radius: var(--tpl-control-radius);
+  background: transparent;
+  text-align: start;
+}
+.tpl-theme .tpl-menu-item.is-danger {
+  color: var(--tpl-danger);
+}
+.tpl-theme .tpl-code {
+  min-height: var(--tpl-touch);
+  padding: 4px 8px;
+  border: 0;
+  border-radius: var(--tpl-control-radius);
+  background: transparent;
+  color: var(--tpl-accent);
+  font: 600 var(--tpl-code-size) / 1.2 var(--tpl-code-font);
+  letter-spacing: 0.08em;
+  text-align: start;
+}
+.tpl-theme .tpl-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--tpl-muted);
+  font-size: 0.875rem;
+}
+.tpl-theme .tpl-next {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--tpl-touch);
+  padding: 0 8px;
+  border: 0;
+  border-radius: var(--tpl-control-radius);
+  background: transparent;
+}
+.tpl-theme .tpl-next-value {
+  font-family: var(--tpl-code-font);
+  letter-spacing: 0.06em;
+}
+.tpl-theme .tpl-time {
+  font-variant-numeric: tabular-nums;
+}
+.tpl-theme .tpl-progress {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--tpl-line);
+}
+.tpl-theme .tpl-progress-fill {
+  display: block;
+  height: 100%;
+  background: var(--tpl-accent);
+  transform-origin: left;
+  transition: transform 250ms linear;
+}
+.tpl-theme [data-expiring="true"] .tpl-progress-fill {
+  background: var(--tpl-danger);
+}
+.tpl-theme .tpl-code-status {
+  color: var(--tpl-warning);
+  font-size: 0.875rem;
+}
+
+/* A new code appears with the effect the user chose in the host's
+   preferences (snapshot.preferences.otpAnimation). */
+.tpl-theme[data-otp-animation="flow"] .tpl-code-value.is-new {
+  animation: tpl-flow 220ms ease-out;
+}
+.tpl-theme[data-otp-animation="flip"] .tpl-code-value.is-new {
+  display: inline-block;
+  animation: tpl-flip 260ms ease-out;
+}
+.tpl-theme[data-otp-animation="spotlight"] .tpl-code-value.is-new {
+  animation: tpl-spotlight 600ms ease-out;
+}
+@keyframes tpl-flow {
+  from {
+    opacity: 0.3;
+    transform: translateY(-6px);
+  }
+}
+@keyframes tpl-flip {
+  from {
+    transform: rotateX(80deg);
+  }
+}
+@keyframes tpl-spotlight {
+  from {
+    background: var(--tpl-selected);
+  }
+}
+
+/* ---- Management page and footer ---- */
+.tpl-theme .tpl-page-title {
+  font-size: 1.25rem;
+}
+.tpl-theme .tpl-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  align-items: start;
+  gap: var(--tpl-gap);
+}
+.tpl-theme .tpl-menu-group {
+  display: grid;
+  gap: 4px;
+  padding: var(--tpl-card-padding);
+  border: 1px solid var(--tpl-line);
+  border-radius: var(--tpl-radius);
+  background: var(--tpl-surface);
+}
+.tpl-theme .tpl-menu-list {
+  display: grid;
+}
+.tpl-theme .tpl-reason {
+  color: var(--tpl-muted);
+}
+.tpl-theme .tpl-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8px var(--tpl-gap) 24px;
+  color: var(--tpl-muted);
+  font-size: 0.875rem;
+}
+/* The version (with a newer release) and the links each stay together: one
+   row on a wide screen; when that row is too narrow the links move under the
+   version as a group, never one link on its own. Phones: see the end. */
+.tpl-theme .tpl-footer-head,
+.tpl-theme .tpl-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 16px;
+}
+/* A button that opens a host dialog, dressed as a link. */
+.tpl-theme button.tpl-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: start;
+  text-decoration: underline;
+}
+/* Messages float above the bottom of the screen and never block clicks. */
+.tpl-theme .tpl-notice {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  z-index: 4;
+  max-width: min(560px, calc(100% - 32px));
+  padding: 10px 16px;
+  border-radius: var(--tpl-control-radius);
+  background: var(--tpl-text);
+  color: var(--tpl-surface);
+  box-shadow: var(--tpl-shadow);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.tpl-theme .tpl-notice[data-kind="error"] {
+  background: var(--tpl-danger);
+}
+
+/* ---- Hover with a mouse, press on a touch screen ---- */
+@media (hover: hover) {
+  .tpl-theme .tpl-button:not(:disabled):hover,
+  .tpl-theme .tpl-icon-button:not(:disabled):hover,
+  .tpl-theme .tpl-menu-item:not(:disabled):hover,
+  .tpl-theme .tpl-menu-entry:not(:disabled):hover,
+  .tpl-theme .tpl-code:not(:disabled):hover,
+  .tpl-theme .tpl-next:not(:disabled):hover {
+    background: var(--tpl-hover);
+  }
+  .tpl-theme .tpl-button.is-primary:not(:disabled):hover {
+    border-color: var(--tpl-accent-hover);
+    background: var(--tpl-accent-hover);
+  }
+  .tpl-theme .tpl-link:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+@media (hover: none) {
+  .tpl-theme .tpl-button:not(:disabled):active,
+  .tpl-theme .tpl-icon-button:not(:disabled):active,
+  .tpl-theme .tpl-menu-item:not(:disabled):active,
+  .tpl-theme .tpl-menu-entry:not(:disabled):active,
+  .tpl-theme .tpl-code:not(:disabled):active,
+  .tpl-theme .tpl-next:not(:disabled):active {
+    background: var(--tpl-hover);
+  }
+  .tpl-theme .tpl-button.is-primary:not(:disabled):active {
+    border-color: var(--tpl-accent-hover);
+    background: var(--tpl-accent-hover);
+  }
+  .tpl-theme .tpl-link:active {
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* ---- Small screens ---- */
+@media (max-width: 600px) {
+  .tpl-theme .tpl-search {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .tpl-theme .tpl-brand {
+    flex: 1;
+  }
+  .tpl-theme .tpl-toolbar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* The version takes its own line and the links two even columns below it,
+     so no link is left alone on the last line. */
+  .tpl-theme .tpl-footer {
+    display: grid;
+  }
+  .tpl-theme .tpl-footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- Less motion when the system or the host asks for it ---- */
+@media (prefers-reduced-motion: reduce) {
+  .tpl-theme *,
+  .tpl-theme *::before,
+  .tpl-theme *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+.tpl-theme[data-reduced-motion="true"] *,
+.tpl-theme[data-reduced-motion="true"] *::before,
+.tpl-theme[data-reduced-motion="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+}

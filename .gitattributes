@@ -1,0 +1,5 @@
+# Keep fresh checkouts reproducible while preserving original resource bytes.
+* text=auto eol=lf
+assets/** -text
+licenses/** -text
+LICENSE -text
